@@ -1,0 +1,29 @@
+<div fxLayout="column">
+  <div class="flex-p">
+    <mat-card>
+      <mat-card-header fxLayout="row wrap" fxLayoutAlign="space-between center">                
+        <mat-card-subtitle fxLayout="row"><h2>{{title}}</h2></mat-card-subtitle>
+        <button mat-raised-button fxLayout="row" class="m-1" style= "padding-left:10px"><mat-icon>search</mat-icon>검색</button>
+      </mat-card-header>
+      <mat-card-content>
+        <form fxLayout="row wrap" fxLayoutAlign="space-between center" fxLayoutGap="6">
+          <div *ngFor="let search of searches" [ngSwitch]="search.type" fxFlex="47">
+            <mat-form-field *ngSwitchCase="'text'" fxFlexFill>
+              <input matInput placeholder="{{search.label}}" [(ngModel)]="search.value" [ngModelOptions]="{standalone: true}" (keydown.enter)="searchEvent()">
+            </mat-form-field>
+            <mat-form-field *ngSwitchCase="'select'" fxFlexFill>
+              <mat-select placeholder="{{search.label}}" [(ngModel)]="search.value" [value]="search.value" [ngModelOptions]="{standalone: true}">
+                <mat-option value="">(선택안함)</mat-option>
+                <mat-option *ngFor="let option of search.options | keyvalue" value="{{option.value}}">{{option.key}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field *ngSwitchCase="'search'" fxFlexFill>
+              <input matInput placeholder="{{search.label}}" value="{{search.valueObj[search.letter]}}" readonly="readonly">
+							<mat-icon matSuffix (click)="openSearchDialog(search)">search</mat-icon>
+            </mat-form-field>
+          </div>
+        </form> 
+      </mat-card-content>
+    </mat-card>
+	</div>
+</div>

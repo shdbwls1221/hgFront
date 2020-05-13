@@ -1,0 +1,25 @@
+<h1 mat-dialog-title>팀 <span *ngIf="!element[elementId]">등록</span><span *ngIf="element[elementId]">변경</span></h1>
+<div mat-dialog-content>
+  <form [formGroup]="form" class="user-form">
+     <div fxLayout="column" class="form-field-outer" *ngFor="let field of formFields" [ngSwitch]="[field.type]"> 
+      <mat-form-field class="w-100" *ngSwitchCase="'text'">
+        <mat-placeholder>{{field.label}}</mat-placeholder>
+        <input matInput formControlName={{field.key}}>
+      </mat-form-field>
+      <mat-form-field *ngSwitchCase="'select'">
+        <mat-select placeholder={{field.label}} formControlName={{field.key}}>
+          <mat-option value="">(선택안함)</mat-option>
+          <mat-option *ngFor="let option of search.options | keyvalue" value="{{option.value}}">{{option.key}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field *ngSwitchCase="'search'">
+        <input matInput placeholder={{field.label}} readonly="readonly" formControlName={{field.key}} [value]="element[field.key][field.letter] ? element[field.key][field.letter] : ''">
+        <mat-icon matSuffix (click)="openSearchDialog(field)">search</mat-icon>
+      </mat-form-field>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-between center">
+  <button mat-raised-button color="primary" (click)="submit(form.value)"><span *ngIf="!element.id">등록</span><span *ngIf="element.id">저장</span></button>
+  <button mat-raised-button color="warn" (click)="close()">취소</button>
+</div>

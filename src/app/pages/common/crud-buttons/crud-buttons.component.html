@@ -1,0 +1,31 @@
+<div fxLayout="row" fxLayoutAlign="space-between left" class="flex-p">
+  <div fxLayout="row">
+    <mat-button-toggle-group #controls="matButtonToggleGroup" appearance="legacy">
+      <mat-button-toggle value="search" (click)="search()">
+        <mat-icon>search</mat-icon>
+      </mat-button-toggle>
+      <mat-button-toggle value="refresh" (click)="refresh()">
+        <mat-icon>refresh</mat-icon>
+      </mat-button-toggle>
+      <mat-button-toggle value="add" (click)="add()">
+        <mat-icon>add</mat-icon>
+      </mat-button-toggle>
+      <mat-button-toggle value="edit" [disabled]="!_listTableComponent.selection.hasValue()" (click)="edit()">
+        <mat-icon>edit</mat-icon>
+      </mat-button-toggle>
+      <mat-button-toggle value="delete" [disabled]="!_listTableComponent.selection.hasValue()" (click)="delete()">
+        <mat-icon>delete</mat-icon>
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+</div>
+<!-- <div fxLayout="row" fxLayoutAlign="space-between left" class="flex-p">
+  <div fxLayout="row" fxLayoutGap="10px">
+    <button mat-raised-button>엑셀 다운로드</button>
+    <button mat-raised-button>스케줄 실행</button>
+    <button mat-raised-button>스케줄 정지</button>
+    <button mat-raised-button>모니터링</button>
+    <button mat-raised-button>보고서 제출</button>
+    <button mat-raised-button>이용신청</button>
+  </div> 
+</div> -->

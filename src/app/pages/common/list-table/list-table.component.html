@@ -1,0 +1,31 @@
+<div fxLayout="column">
+  <div class="flex-p">
+    <mat-table #table matSort [dataSource]="list" class="mat-elevation-z8 w-100" (matSortChange)="sortData($event)">
+      <ng-container matColumnDef="select">
+        <mat-header-cell *matHeaderCellDef fxFlex="80px" fxFlexFill >
+          <mat-checkbox (click)="onSelect()" (change)="$event ? masterToggle() : null"
+            [checked]="selection.hasValue() && isAllSelected()"
+            [indeterminate]="selection.hasValue() && !isAllSelected()">
+          </mat-checkbox>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row" fxFlex="80px" fxFlexFill>
+          <mat-checkbox (click)="$event.stopPropagation(); onSelect();" (change)="$event ? selection.toggle(row) : null"
+            [checked]="selection.isSelected(row)">
+          </mat-checkbox>
+        </mat-cell>
+      </ng-container>
+      <ng-container *ngFor="let column of columns">
+        <ng-container matColumnDef={{column.columnDef}}>
+          <mat-header-cell *matHeaderCellDef fxFlex={{column.columnSize}} mat-sort-header> {{column.columnName}} </mat-header-cell>
+          <mat-cell *matCellDef="let element" fxFlex={{column.columnSize}}>
+           <!-- {{getElement(column.key, element)}}-->
+						{{getLetter(column, element)}}
+          </mat-cell>
+        </ng-container>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row); onSelect();"></mat-row>
+    </mat-table>
+    <mat-paginator #paginator [length]="length" [pageSize]="page.pageSize" [pageSizeOptions]="pageSizeOptions" (page)="paginate($event)"></mat-paginator>
+  </div>
+</div>

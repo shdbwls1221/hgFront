@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>{{title}}</h1>
+
+<team-list (selectEvent)="setSelection($event)" [isDialog]="true" *ngIf="searchModel == 'Team'"></team-list>
+<user-list (selectEvent)="setSelection($event)" [isDialog]="true" *ngIf="searchModel == 'User'"></user-list>
+<app-con-interface-list (selectEvent)="setSelection($event)" [isDialog]="true" *ngIf="searchModel == 'ConInterface'"></app-con-interface-list>
+
+<div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-between center">
+  <button mat-raised-button color="primary" (click)="select()"><span>선택</span></button>
+  <button mat-raised-button color="warn" (click)="close()">취소</button>
+</div>

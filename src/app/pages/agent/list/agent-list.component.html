@@ -1,0 +1,22 @@
+<!-- <app-agent [agentId]="agentId"></app-agent> -->
+
+
+ <div>
+<table mat-table [dataSource]="contents" class="mat-elevation-z8">
+      <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
+        <th mat-header-cell *matHeaderCellDef>{{ column.header }}</th>
+        <td mat-cell *matCellDef="let row">{{ column.cell(row) }}</td>
+      </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="getRecord(row)"></tr>
+</table>
+
+</div>
+<!-- <common-list-table #listTableComponent [columns]="columns" (event)="search()"></common-list-table> -->
+<mat-paginator [length]="length"
+              [pageSize]="pageSize"
+              [pageSizeOptions]="pageSizeOptions"
+              showFirstLastButtons
+              (page) ="getPageData($event)">
+</mat-paginator>
+

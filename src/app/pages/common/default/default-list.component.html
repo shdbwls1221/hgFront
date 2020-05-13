@@ -1,0 +1,6 @@
+<common-search #searchComponent [searches]="searches" [title]="title" (event)="search()"></common-search>
+<common-crud-buttons #crudButtonsComponent [listTableComponent]="listTableComponent" [listComponent]="this"
+  (searchEvent)="search()" (refreshEvent)="refresh()" (addEvent)="openEditDialog(true)" (editEvent)="openEditDialog(false)" (deleteEvent)="delete()" 
+  *ngIf="!isDialog">
+</common-crud-buttons>
+<common-list-table #listTableComponent [columns]="columns" (event)="search()" (selectEvent)="onSelect()"></common-list-table>
